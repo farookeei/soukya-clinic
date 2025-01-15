@@ -1,4 +1,5 @@
 /* Base */
+
 html,body {
   overflow-x: hidden; }
 
@@ -933,6 +934,7 @@ h1, h2, h3, h4, h5,
 .img-wrap-1 img {
   max-width: 400px; }
 
+
   @media (max-width: 576px) {
     .img-wrap-1 {
         overflow: hidden;
@@ -1045,24 +1047,50 @@ h1, h2, h3, h4, h5,
         .services .service:hover h3:before {
           background: #2fc4b2; }
 
+/* Testimonial Styling */
 .testimonial-2 {
-  border-radius: 7px;
-  background: #fff;
-  padding: 30px;
-  -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.1);
-  box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.1); }
-  .testimonial-2 blockquote {
-    font-size: 18 px; }
-  .testimonial-2 .v-card img {
-    width: 50px;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 50px;
-    flex: 0 0 50px;
-    border-radius: 50%; }
-  .testimonial-2 .author-name {
-    line-height: 1.3; }
-    .testimonial-2 .author-name > span:nth-of-type(2) {
-      color: #ccc; }
+  border-radius: 10px;
+  background: #f9f9f9; /* Light neutral background for elegance */
+  padding: 40px; /* Slightly larger padding for more spacing */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Softer shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+.testimonial-2:hover {
+  transform: translateY(-10px); /* Subtle lift on hover */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+.testimonial-2 blockquote {
+  font-size: 16px; /* Slightly smaller font for refined look */
+  font-style: italic;
+  color: #555; /* Soft gray color for text */
+  line-height: 1.6; /* Improve readability */
+  margin-bottom: 20px;
+}
+.testimonial-2 .v-card {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Add spacing between the image and text */
+}
+.testimonial-2 .v-card img {
+  width: 60px; /* Slightly larger for better emphasis */
+  height: 60px;
+  border-radius: 50%; /* Circular avatar */
+  object-fit: cover; /* Ensure the image fills the container */
+  border: 2px solid #ddd; /* Light border for profile image */
+}
+.testimonial-2 .author-name {
+  font-size: 14px;
+  color: #333; /* Darker color for emphasis */
+  font-weight: bold;
+}
+.testimonial-2 .author-name span {
+  display: block; /* Separate each span into new lines */
+}
+.testimonial-2 .author-name > span:nth-of-type(2) {
+  font-size: 12px; /* Smaller size for secondary text */
+  color: #999; /* Lighter gray for subtler appearance */
+}
+
 
 .post-entry-1 .post-entry-1-contents .meta {
   margin-bottom: 15px;
@@ -1085,29 +1113,111 @@ h1, h2, h3, h4, h5,
   .post-entry-1.person-1 .post-entry-1-contents {
     padding-top: 4rem; }
 
+/* Base Styling */
 .service-2 {
   padding: 20px;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1);
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1); }
+  border-radius: 10px;
+  background: #f9f9f9;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.service-2:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  background: #ffffff;
+}
+
+/* Icon Styling */
+.service-2 .icon-wrap {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #2fc4b2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.service-2 .icon-wrap span {
+  font-size: 28px;
+  color: #fff;
+}
+
+/* Text Styling */
+.service-2 .contents {
+  flex: 1;
+}
+.service-2 .contents h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+}
+.service-2 .contents p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .service-2 {
+      flex-direction: column; /* Stack content vertically */
+      text-align: center;
+      padding: 15px;
+  }
+
   .service-2 .icon-wrap {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100px;
-    flex: 0 0 100px;
-    font-size: 60px; }
+      margin-bottom: 15px; /* Add spacing below the icon */
+      width: 50px; /* Adjust size for smaller devices */
+      height: 50px;
+  }
+
   .service-2 .contents h3 {
-    font-size: 20px;
-    color: #000; }
+      font-size: 16px; /* Slightly smaller heading */
+  }
+
   .service-2 .contents p {
-    color: rgba(0, 0, 0, 0.5);
-    font-size: 14px; }
+      font-size: 13px; /* Smaller text for better fit */
+  }
+}
+
 
 .site-footer {
-  background: #efefef; }
-  .site-footer .quick-contact-info .caption {
-    font-size: 18px; }
-  .site-footer .quick-contact-info .icon-wrap span {
-    font-size: 30px; }
+    background: #efefef;
+    padding: 60px 0; /* Increase padding for top and bottom */
+}
+
+.site-footer .quick-contact-info {
+    margin-bottom: 30px; /* Add spacing between sections */
+}
+
+.site-footer .quick-contact-info .caption {
+    font-size: 18px;
+    color: #333; /* Darker text color */
+    font-weight: 500; /* Semi-bold font weight */
+}
+
+.site-footer .quick-contact-info .icon-wrap {
+    margin-bottom: 15px; /* Add spacing below icon */
+}
+
+.site-footer .quick-contact-info .icon-wrap span {
+    font-size: 30px;
+    color: #2fc4b2; /* Accent color for icons */
+}
+
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 40px 0; /* Adjust padding for smaller screens */
+    }
+}
+
 
 .sidebar-box {
   margin-bottom: 30px;
