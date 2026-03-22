@@ -1,460 +1,784 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 
-  <head>
-    <title>Soukhya Health Care</title>
-    <link rel="icon" type="image/png" href="images/logo.avif">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soukhya Health Care | Premium Acupuncture</title>
+  <link rel="icon" type="image/png" href="images/logo.avif">
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
 
-    <link rel="stylesheet" href="fonts/icomoon/style.css">
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#f0fdf6',
+              100: '#dcfce9',
+              200: '#bbf7d2',
+              300: '#86efae',
+              400: '#4ade85',
+              500: '#22c560',
+              600: '#16a34c',
+              700: '#15803d',
+              800: '#166535',
+              900: '#14532e',
+              950: '#052e17',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          boxShadow: {
+            'soft': '0 20px 40px -15px rgba(0,0,0,0.05)',
+          }
+        }
+      }
+    }
+  </script>
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="css/jquery.fancybox.min.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-    <link rel="stylesheet" href="css/aos.css">
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <!-- MAIN CSS -->
-    <link rel="stylesheet" href="css/style.css">
+  <style>
+    .glass {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
 
-  </head>
+    /* Subtle Entrance Animations */
+    @keyframes fade-in-up {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
 
-  <body>
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-    
-    <div class="site-wrap" id="home-section">
+    .animate-fade-in-up {
+      animation: fade-in-up 0.8s ease-out forwards;
+      opacity: 0;
+    }
 
-      <div class="site-mobile-menu site-navbar-target">
-        <div class="site-mobile-menu-header">
-          <div class="site-mobile-menu-close mt-3">
-            <span class="icon-close2 js-menu-toggle"></span>
-          </div>
+    .delay-100 {
+      animation-delay: 100ms;
+    }
+
+    .delay-200 {
+      animation-delay: 200ms;
+    }
+
+    .delay-300 {
+      animation-delay: 300ms;
+    }
+
+    .hero-bg {
+      background-image: linear-gradient(rgba(20, 83, 46, 0.6), rgba(20, 83, 46, 0.4)), url('images/bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+  </style>
+</head>
+
+<body class="font-sans text-stone-700 bg-stone-50 antialiased">
+
+  <!-- Navigation -->
+  <header x-data="{ mobileMenuOpen: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)"
+    :class="{ 'glass shadow-sm py-3': scrolled, 'bg-transparent py-5': !scrolled }"
+    class="fixed w-full top-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center">
+        <!-- Logo -->
+        <div class="flex-shrink-0 flex items-center">
+          <a href="index.html" class="font-serif text-2xl font-bold tracking-tight"
+            :class="scrolled ? 'text-primary-900' : 'text-white'">
+            Soukhya<span class="text-primary-400">.</span>
+          </a>
         </div>
-        <div class="site-mobile-menu-body"></div>
-      </div>
 
+        <!-- Desktop Menu -->
+        <nav class="hidden md:flex space-x-8">
+          <a href="#" class="text-sm font-medium transition-colors hover:text-primary-400"
+            :class="scrolled ? 'text-stone-600' : 'text-stone-100'">Home</a>
+          <a href="#about" class="text-sm font-medium transition-colors hover:text-primary-400"
+            :class="scrolled ? 'text-stone-600' : 'text-stone-100'">About</a>
+          <a href="#services" class="text-sm font-medium transition-colors hover:text-primary-400"
+            :class="scrolled ? 'text-stone-600' : 'text-stone-100'">Services</a>
+          <a href="#testimonials" class="text-sm font-medium transition-colors hover:text-primary-400"
+            :class="scrolled ? 'text-stone-600' : 'text-stone-100'">Testimonials</a>
+          <a href="#contact" class="px-5 py-2 rounded-full text-sm font-medium transition-all transform hover:scale-105"
+            :class="scrolled ? 'bg-primary-600 text-white shadow-md hover:bg-primary-700' : 'bg-white text-primary-900 hover:bg-stone-100'">
+            Contact Us
+          </a>
+        </nav>
 
-
-      <header class="site-navbar site-navbar-target" role="banner">
-
-        <div class="container">
-          <div class="row align-items-center position-relative">
-
-            <div class="col-3">
-              <div class="site-logo">
-                <a href="index.html">Soukya Health Care<span class="text-primary">.</span> </a>
-              </div>
-            </div>
-
-            <div class="col-9 text-right">
-              
-              <span class="d-inline-block d-lg-none"><a href="#" class=" site-menu-toggle js-menu-toggle py-5 "><span class="icon-menu h3 text-white"></span></a></span>
-
-              <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
-                <ul class="site-menu main-menu js-clone-nav ml-auto ">
-                  <li class="active"><a href="index.html" class="nav-link">Home</a></li>
-                  <li><a href="#about" class="nav-link">About</a></li>
-                  <li><a href="#services" class="nav-link">Services</a></li>
-                  <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
-                  <li><a href="#our_journey" class="nav-link">Our Journey</a></li>  
-                  <li><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
-              </nav>
-            </div>
-
-            
-          </div>
-        </div>
-
-      </header>
-
-      
-      <div class="hero" style="background-image: url('images/bg.jpg');">
-        
-        <div class="container">
-          <div class="row align-items-center justify-content-center">
-            <div class="col-lg-8 intro text-center">
-              <h1 class="text-white"><strong class="text-primary">Improve</strong> your overall health.</h1>
-                  <div class="desc">Restore balance, relieve pain, and improve your well-being with expert acupuncture care tailored to you.</div>
-
-                  <div class="col-lg-8 mx-auto">
-                    <a href="https://youtu.be/th8DOlF-sC0?si=J9dEwPTGyeRYH-DR" data-fancybox class=" play-now mx-auto">
-                      <span class="icon">
-                        <span class="icon-play"></span>
-                      </span>
-                      <span class="caption text-white">Watch intro video</span>
-                    </a>
-                  </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="services" id="services">
-        <div class="container-fluid px-0">
-            <div class="row no-gutters align-items-stretch">
-                <div class="col-6 col-sm-6 col-md col-lg h-100">
-                    <div href="#" class="service">
-                        <div class="icon-wrap">
-                            <span class="flaticon-acupuncture-2"></span>
-                        </div>
-                        <h3>Acupuncture</h3>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md col-lg h-100">
-                    <div href="#" class="service">
-                        <div class="icon-wrap">
-                            <span class="flaticon-therapy"></span>
-                        </div>
-                        <h3>Therapies</h3>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md col-lg h-100">
-                    <div href="#" class="service">
-                        <div class="icon-wrap">
-                            <span class="flaticon-herbal"></span>
-                        </div>
-                        <h3>Nutrition & Healing</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="site-section" id="about">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Image Section -->
-                <div class="col-lg-7 text-center order-lg-2">
-                    <div class="img-wrap-1 mb-5">
-                        <img src="images/acupuncture_2.png" alt="Acupuncture Treatment" class="img-fluid">
-                    </div>
-                </div>
-                <!-- Text Content Section -->
-                <div class="col-lg-4 ml-auto order-lg-1">
-                    <h3 class="mb-4 section-heading"><strong>Why Choose Us</strong></h3>
-                    <p>
-                        At our clinic, we specialize in providing effective, holistic treatments tailored to your unique needs. 
-                        Our team has completed advanced courses to ensure accurate diagnoses and exceptional care. From managing 
-                        chronic pain to restoring energy balance, we combine expertise and compassion to promote healing and well-being.
-                    </p>
-                    <p>
-                        Whether you need <strong>Tung Acupuncture</strong>, <strong>Chinese Acupuncture</strong>, or therapies like <strong>Sujok</strong> and <strong>Color Therapy</strong>, 
-                        we provide personalized care every step of the way.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="site-section" id="specializations">
-        <div class="container">
-            <h3 class="mb-4 section-heading text-center"><strong>Our Specializations</strong></h3>
-            <ul class="mb-5">
-                <li><strong>Varicose Vein:</strong> Relief from painful, swollen veins with advanced techniques.</li>
-                <li><strong>Diabetic Neuropathy:</strong> Manage nerve pain and improve sensation.</li>
-                <li><strong>Bone Issues:</strong> Tailored care for arthritis, fractures, and joint problems.</li>
-                <li><strong>ADHD, Epilepsy, Learning Disability, Autism:</strong> Support for neurological and developmental conditions.</li>
-                <li><strong>Trigeminal Neuralgia:</strong> Specialized treatment for severe facial nerve pain.</li>
-            </ul>
-        </div>
-    </div>
-    
-    <div class="site-section" id="treatments">
-        <div class="container">
-            <h3 class="mb-4 section-heading text-center"><strong>Our Treatments</strong></h3>
-            <div class="row">
-                <div class="col-lg-6 mb-4">
-                    <a href="#" class="d-flex service-2">
-                        <div class="icon-wrap">
-                            <span class="flaticon-acupuncture-1"></span>
-                        </div>
-                        <div class="contents">
-                            <h3>Tung Acupuncture</h3>
-                            <p>Discover the precision of Tung Acupuncture, a method known for rapid pain relief and restoring balance.</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <a href="#" class="d-flex service-2">
-                        <div class="icon-wrap">
-                            <span class="flaticon-acupuncture-2"></span>
-                        </div>
-                        <div class="contents">
-                            <h3>Chinese Acupuncture</h3>
-                            <p>Rebalance your energy and relieve pain through traditional Chinese acupuncture techniques.</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <a href="#" class="d-flex service-2">
-                        <div class="icon-wrap">
-                            <span class="flaticon-therapy"></span>
-                        </div>
-                        <div class="contents">
-                            <h3>Sujok Therapy</h3>
-                            <p>A holistic approach that stimulates healing through hands and feet.</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <a href="#" class="d-flex service-2">
-                        <div class="icon-wrap">
-                            <span class="flaticon-herbal"></span>
-                        </div>
-                        <div class="contents">
-                            <h3>Nutrition & Color Therapy</h3>
-                            <p>Personalized therapies to complement your body’s natural healing process.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-      <div class="site-section bg-light" id="testimonials">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-7 text-center mx-auto">
-              <span class="text-primary d-block">Testimonials</span>
-              <h2 class="section-heading"><strong>Happy Customers</strong></h2>
-              <p class="mb-5">Discover how our specialized care has transformed lives. From precise treatments to personalized attention, our patients share their journey to better health and well-being.</p>    
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-4 mb-4 mb-lg-0">
-              <div class="testimonial-2">
-                <blockquote class="mb-4">
-                  <p>"Your health can be entrusted in this place. Treating for the disease by solving the real cause that too without any medicines . Hence, no need to bear any side effects."</p>
-                </blockquote>
-                <div class="d-flex v-card align-items-center">
-                  <!-- <img src="images/person_1.jpg" alt="Image" class="img-fluid mr-3"> -->
-                  <div class="author-name">
-                    <span class="d-block">Fathima Mackar</span>
-                    <!-- <span>Student</span> -->
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 mb-4 mb-lg-0">
-              <div class="testimonial-2">
-                <blockquote class="mb-4">
-                  <p>"'Health' to me is synonymous to 'Soukhya health care'. By saying this place caters to every aspect of your overall health, I am vouching for 4 people who've Directly experienced the magic of Soukhya. I don't think you'll find a more gentle soul than the maestro of Soukhya, Pr. Shajahan sir. Not only is he willing to clear all your doubts, he encourages it. I have personally seen the efforts Master Shajahan takes to 'Soukhya' your health, and I 100% recommend this institution."</p>
-                </blockquote>
-                <div class="d-flex v-card align-items-center">
-                  <!-- <img src="images/person_2.jpg" alt="Image" class="img-fluid mr-3"> -->
-                  <div class="author-name">
-                    <span class="d-block">Abutahir Puthedath</span>
-                    <!-- <span>Student</span> -->
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 mb-4 mb-lg-0">
-              <div class="testimonial-2">
-                <blockquote class="mb-4">
-                  <p>"He is simple and gentle  at heart. The remarkable thing is giving  sufficient  time to each patient. His clinical diagnosis is very sharp. One of the best doctors I have ever visited"</p>
-                </blockquote>
-                <div class="d-flex v-card align-items-center">
-                  <!-- <img src="images/person_3.jpg" alt="Image" class="img-fluid mr-3"> -->
-                  <div class="author-name">
-                    <span class="d-block">Fathima Zaima</span>
-                    <!-- <span >Customer</span> -->
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden flex items-center">
+          <button @click="mobileMenuOpen = !mobileMenuOpen" type="button"
+            class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none"
+            :class="scrolled ? 'text-stone-800' : 'text-white'">
+            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+              <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+              <path x-show="mobileMenuOpen" style="display: none;" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
       </div>
-
-      <div class="site-section" id="our_journey">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-7 text-center mx-auto">
-              <span class="text-primary d-block">Our Journey</span>
-              <h2 class="section-heading"><strong>Insights, Events & Collaborations</strong></h2>
-              <p class="mb-5">From international training to holistic breakthroughs, explore the highlights of our practice and continued learning in the world of acupuncture and integrative therapies.</p>    
-            </div>
-          </div>
-      
-          <div class="row">
-            <!-- Blog Entry 1 -->
-            <div class="col-lg-4">
-              <div class="post-entry-1 h-100">
-                <a href="#" class="mb-3 d-block">
-                  <img src="images/tutor1.jpeg" alt="Korean Collaboration" class="img-fluid">
-                </a>
-                <div class="post-entry-1-contents">
-                  <span class="meta d-inline-block">July 10, 2020 <span class="mx-2">by</span> <a href="#">Soukhya Clinic</a></span>
-                  <h2><a href="#">Collaborating with Korean Acupuncture Experts</a></h2>
-                  <p>Our practitioner had the honor of meeting Korean acupuncture scholars and discussing integrative approaches in modern practice.</p>
-                </div>
-              </div>
-            </div>
-      
-            <!-- Blog Entry 2 -->
-            <div class="col-lg-4">
-              <div class="post-entry-1 h-100">
-                <a href="#" class="mb-3 d-block">
-                  <img src="images/tutor2.jpeg" alt="Chinese Lecture" class="img-fluid">
-                </a>
-                <div class="post-entry-1-contents">
-                  <span class="meta d-inline-block">June 22, 2019 <span class="mx-2">by</span> <a href="#">Soukhya Clinic</a></span>
-                  <h2><a href="#">With Senior Lecturers from China</a></h2>
-                  <p>A valuable learning exchange with esteemed Chinese lecturers on classical acupuncture and advanced pain-relief techniques.</p>
-                </div>
-              </div>
-            </div>
-      
-            <!-- Blog Entry 3 -->
-            <div class="col-lg-4">
-              <div class="post-entry-1 h-100">
-                <a href="#" class="mb-3 d-block">
-                  <img src="images/tutor3.jpeg" alt="Global Training" class="img-fluid">
-                </a>
-                <div class="post-entry-1-contents">
-                  <span class="meta d-inline-block">May 30, 2021 <span class="mx-2">by</span> <a href="#">Soukhya Clinic</a></span>
-                  <h2><a href="#">Global Insights for Local Healing</a></h2>
-                  <p>Combining global exposure with local practice, we continue to enhance our treatments with the latest global acupuncture techniques.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-
-
-      <div class="site-section">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-7 text-center mx-auto">
-              <span class="text-primary d-block">Videos</span>
-              <h2 class="section-heading"><strong>Watch & Learn</strong></h2>
-              <p class="mb-5">Explore tips and insights through our video content.</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-4">
-              <div class="video-thumbnail">
-                <a href="https://www.youtube.com/watch?v=th8DOlF-sC0" target="_blank">
-                  <img src="https://img.youtube.com/vi/th8DOlF-sC0/hqdefault.jpg" alt="Video 1">
-                  <span class="video-play-icon">▶</span>
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="video-thumbnail">
-                <a href="https://www.youtube.com/watch?v=e8zfmbhTDyM" target="_blank">
-                  <img src="https://img.youtube.com/vi/e8zfmbhTDyM/hqdefault.jpg" alt="Video 2">
-                  <span class="video-play-icon">▶</span>
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="video-thumbnail">
-                <a href="https://www.youtube.com/watch?v=dSrES9iuWQI" target="_blank">
-                  <img src="https://img.youtube.com/vi/dSrES9iuWQI/hqdefault.jpg" alt="Video 3">
-                  <span class="video-play-icon">▶</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="site-section bg-primary py-5" id="contact">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-lg-7 mb-4 mb-md-0">
-              <h2 class="mb-0 text-white">What are you waiting for?</h2>
-              <p class="mb-0 opa-7">Rediscover a life free from pain and stress with our expert acupuncture treatments. Your journey to wellness starts here.</p>
-            </div>
-            <!-- <div class="col-lg-5 text-md-right">
-              <a href="#" class="btn btn-primary btn-white">Contact us now</a>
-            </div> -->
-          </div>
-        </div>
-      </div>
-      
-
-      
-      <footer class="site-footer py-5">
-        <div class="container">
-
-          <div class="row">
-            <div class="col-lg-4">
-
-              <div class="text-center quick-contact-info">
-                <div class="mb-3 icon-wrap">
-                  <span class="icon-phone"></span>
-                </div>
-                <span class="caption">+91 7558835049 </span>
-              </div>
-
-            </div>
-            <div class="col-lg-4">
-
-              <div class="text-center quick-contact-info">
-                <div class="mb-3 icon-wrap">
-                  <span class="icon-room"></span>
-                </div>
-                <span class="caption">Near Eramam Balavadi, Muppathadam Rd, Eramam, Aluva, Kerala 683110</span>
-              </div>
-
-            </div>
-            <div class="col-lg-4">
-
-             <div class="text-center quick-contact-info">
-    <div class="mb-3 icon-wrap">
-        <span class="icon-envelope-o"></span>
-    </div>
-    <a href="mailto:soukhyaclinic@gmail.com" class="caption">soukhyaclinic@gmail.com</a>
-</div>
-
-            </div>
-          </div>
-          
-          
-          <div class="row pt-5 mt-5 text-center">
-            <div class="col-lg-7 text-lg-left">
-              <p>
-               Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-               </p>
-            </div>
-            
-           
-
-          </div>
-
- 
-
-        </div>
-      </footer>
-
     </div>
 
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.sticky.js"></script>
-    <script src="js/jquery.waypoints.min.js"></script>
-    <script src="js/jquery.animateNumber.min.js"></script>
-    <script src="js/jquery.fancybox.min.js"></script>
-    <script src="js/jquery.easing.1.3.js"></script>
-    <script src="js/bootstrap-datepicker.min.js"></script>
-    <script src="js/aos.js"></script>
+    <!-- Mobile Menu -->
+    <div x-show="mobileMenuOpen" x-transition
+      class="md:hidden bg-white shadow-xl absolute w-full top-full left-0 border-t border-stone-100"
+      style="display: none;">
+      <div class="px-4 pt-2 pb-6 space-y-1">
+        <a href="#"
+          class="block px-3 py-3 text-base font-medium text-stone-700 hover:text-primary-600 hover:bg-stone-50 rounded-md">Home</a>
+        <a href="#about"
+          class="block px-3 py-3 text-base font-medium text-stone-700 hover:text-primary-600 hover:bg-stone-50 rounded-md">About</a>
+        <a href="#services"
+          class="block px-3 py-3 text-base font-medium text-stone-700 hover:text-primary-600 hover:bg-stone-50 rounded-md">Services</a>
+        <a href="#testimonials"
+          class="block px-3 py-3 text-base font-medium text-stone-700 hover:text-primary-600 hover:bg-stone-50 rounded-md">Testimonials</a>
+        <a href="#contact"
+          class="block px-3 py-3 mt-4 text-center text-base font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg">Contact
+          Us</a>
+      </div>
+    </div>
+  </header>
 
-    <script src="js/main.js"></script>
+  <!-- Hero Section -->
+  <section class="relative h-screen min-h-[600px] flex items-center justify-center hero-bg">
+    <div class="absolute inset-0 bg-primary-950/30 mix-blend-multiply"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-fade-in-up">
+      <span
+        class="inline-block py-1 px-3 rounded-full bg-primary-500/20 text-primary-100 backdrop-blur-md text-sm font-semibold tracking-wider mb-6 uppercase border border-primary-400/30">Premium
+        Care</span>
+      <h1 class="text-5xl md:text-7xl font-serif text-white font-bold leading-tight mb-6">
+        Restore Balance.<br>
+        <span class="text-primary-300 italic font-normal">Improve</span> Your Health.
+      </h1>
+      <p class="mt-4 max-w-2xl mx-auto text-xl text-stone-200 font-light mb-10 leading-relaxed">
+        Relieve pain and improve your well-being with expert, holistic acupuncture care tailored specifically to
+        you.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+        <a href="#services"
+          class="px-8 py-4 w-full sm:w-auto text-base font-medium rounded-full text-primary-900 bg-white hover:bg-stone-100 transition-all shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] transform hover:-translate-y-1">
+          Discover Our Services
+        </a>
+        <a href="https://youtu.be/th8DOlF-sC0?si=J9dEwPTGyeRYH-DR" target="_blank"
+          class="group px-8 py-4 w-full sm:w-auto flex items-center justify-center gap-3 text-base font-medium rounded-full text-white border border-white/30 hover:bg-white/10 transition-all backdrop-blur-sm">
+          <span
+            class="w-8 h-8 rounded-full bg-white text-primary-900 flex items-center justify-center group-hover:scale-110 transition-transform">
+            <svg class="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z">
+              </path>
+            </svg>
+          </span>
+          Watch Intro
+        </a>
+      </div>
+    </div>
 
-  </body>
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <a href="#about" class="text-white/70 hover:text-white transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Mini Services Grid (Overlapping Hero slightly) -->
+  <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+      <!-- Card 1 -->
+      <div
+        class="bg-white rounded-2xl p-8 shadow-soft border border-stone-100 transform transition-all hover:-translate-y-2 hover:shadow-xl group">
+        <div
+          class="w-14 h-14 bg-primary-50 rounded-xl flex items-center justify-center text-primary-600 mb-6 group-hover:scale-110 transition-transform group-hover:bg-primary-600 group-hover:text-white">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M14 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M21 12c0 1.2-.4 2.3-1 3.2M3 12c0-1.2.4-2.3 1-3.2m16-4.6c-.8-1-1.8-1.8-3-2.3M4 16.6c.8 1 1.8 1.8 3 2.3" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-serif font-bold text-stone-900 mb-2">Acupuncture</h3>
+        <p class="text-stone-500 font-light text-sm leading-relaxed">Traditional and modern methods to trigger
+          the
+          body's natural healing abilities.</p>
+      </div>
+      <!-- Card 2 -->
+      <div
+        class="bg-white rounded-2xl p-8 shadow-soft border border-stone-100 transform transition-all hover:-translate-y-2 hover:shadow-xl group">
+        <div
+          class="w-14 h-14 bg-primary-50 rounded-xl flex items-center justify-center text-primary-600 mb-6 group-hover:scale-110 transition-transform group-hover:bg-primary-600 group-hover:text-white">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+            </path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-serif font-bold text-stone-900 mb-2">Therapies</h3>
+        <p class="text-stone-500 font-light text-sm leading-relaxed">Comprehensive therapies such as Sujok and
+          Color
+          Therapy for targeted relief.</p>
+      </div>
+      <!-- Card 3 -->
+      <div
+        class="bg-white rounded-2xl p-8 shadow-soft border border-stone-100 transform transition-all hover:-translate-y-2 hover:shadow-xl group">
+        <div
+          class="w-14 h-14 bg-primary-50 rounded-xl flex items-center justify-center text-primary-600 mb-6 group-hover:scale-110 transition-transform group-hover:bg-primary-600 group-hover:text-white">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+            </path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-serif font-bold text-stone-900 mb-2">Nutrition & Healing</h3>
+        <p class="text-stone-500 font-light text-sm leading-relaxed">Lifestyle and nutritional guidance to
+          maintain a
+          harmonious, pain-free life.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <section id="about" class="py-24 bg-stone-50 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row items-center gap-16">
+        <!-- Image side -->
+        <div class="w-full lg:w-1/2 relative">
+          <div class="absolute inset-0 bg-primary-100 rounded-3xl transform translate-x-4 translate-y-4 -z-10">
+          </div>
+          <img src="images/acupuncture_2.png" alt="Acupuncture Treatment"
+            class="rounded-3xl shadow-soft object-cover w-full h-auto bg-white border border-stone-100">
+          <!-- Floating badge -->
+          <div
+            class="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl flex items-center gap-4 border border-stone-100 animate-fade-in-up delay-200">
+            <div class="bg-primary-50 p-3 rounded-full text-primary-600">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm text-stone-500 font-medium">Expert Care</p>
+              <p class="font-bold text-stone-900 font-serif">Certified Specialists</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content side -->
+        <div class="w-full lg:w-1/2">
+          <h2 class="text-primary-600 font-medium tracking-wide text-sm uppercase mb-3">Why Choose Us</h2>
+          <h3 class="text-4xl lg:text-5xl font-serif font-bold text-stone-900 mb-6 leading-tight">Holistic
+            treatments<br>tailored to <span class="text-primary-600 italic font-normal">your unique
+              needs.</span></h3>
+          <p class="text-stone-600 font-light text-lg mb-6 leading-relaxed">
+            At our clinic, we specialize in providing effective, holistic treatments tailored to your unique
+            needs. Our
+            team has completed advanced courses to ensure accurate diagnoses and exceptional care.
+          </p>
+          <p class="text-stone-600 font-light text-lg mb-8 leading-relaxed">
+            From managing chronic pain to restoring energy balance, we combine expertise and compassion to
+            promote
+            healing and well-being. Whether you need <strong class="text-stone-900 font-medium">Tung
+              Acupuncture</strong>, <strong class="text-stone-900 font-medium">Chinese
+              Acupuncture</strong>, or
+            therapies like <strong class="text-stone-900 font-medium">Sujok</strong> and <strong
+              class="text-stone-900 font-medium">Color Therapy</strong>, we provide personalized care
+            every step of the
+            way.
+          </p>
+
+          <ul class="space-y-4 font-medium text-stone-700">
+            <li class="flex items-start">
+              <svg class="h-6 w-6 text-primary-500 mr-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Advanced diagnostic techniques
+            </li>
+            <li class="flex items-start">
+              <svg class="h-6 w-6 text-primary-500 mr-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Pain-free & side-effect-free methods
+            </li>
+            <li class="flex items-start">
+              <svg class="h-6 w-6 text-primary-500 mr-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Personalized attention for every patient
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-24 bg-white relative">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-40"
+      style="background-image: radial-gradient(#16a34a 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-primary-600 font-medium tracking-wide text-sm uppercase mb-3">Our Expertise</h2>
+        <h3 class="text-4xl font-serif font-bold text-stone-900 mb-4">Comprehensive Treatments</h3>
+        <p class="text-stone-500 text-lg font-light">Explore our specialized services designed to heal body and
+          mind.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        <!-- Treatment 1 -->
+        <div
+          class="group flex gap-6 p-6 rounded-2xl hover:bg-stone-50 transition-colors border border-transparent hover:border-stone-100">
+          <div
+            class="w-16 h-16 shrink-0 bg-primary-50 text-primary-600 rounded-xl flex items-center justify-center group-hover:bg-primary-600 group-hover:text-white transition-all shadow-sm">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div>
+            <h4 class="text-2xl font-serif font-bold text-stone-900 mb-2">Tung Acupuncture</h4>
+            <p class="text-stone-500 font-light leading-relaxed">Discover the precision of Tung Acupuncture,
+              an ancient
+              method known for rapid pain relief and effectively restoring the body's natural balance.</p>
+          </div>
+        </div>
+        <!-- Treatment 2 -->
+        <div
+          class="group flex gap-6 p-6 rounded-2xl hover:bg-stone-50 transition-colors border border-transparent hover:border-stone-100">
+          <div
+            class="w-16 h-16 shrink-0 bg-primary-50 text-primary-600 rounded-xl flex items-center justify-center group-hover:bg-primary-600 group-hover:text-white transition-all shadow-sm">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <div>
+            <h4 class="text-2xl font-serif font-bold text-stone-900 mb-2">Chinese Acupuncture</h4>
+            <p class="text-stone-500 font-light leading-relaxed">Rebalance your energy (Qi) and relieve
+              chronic pain
+              through time-tested traditional Chinese acupuncture techniques tailored to your condition.
+            </p>
+          </div>
+        </div>
+        <!-- Treatment 3 -->
+        <div
+          class="group flex gap-6 p-6 rounded-2xl hover:bg-stone-50 transition-colors border border-transparent hover:border-stone-100">
+          <div
+            class="w-16 h-16 shrink-0 bg-primary-50 text-primary-600 rounded-xl flex items-center justify-center group-hover:bg-primary-600 group-hover:text-white transition-all shadow-sm">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />
+            </svg>
+          </div>
+          <div>
+            <h4 class="text-2xl font-serif font-bold text-stone-900 mb-2">Sujok Therapy</h4>
+            <p class="text-stone-500 font-light leading-relaxed">A holistic and non-invasive approach that
+              maps the
+              entire body on the hands and feet to stimulate powerful healing responses.</p>
+          </div>
+        </div>
+        <!-- Treatment 4 -->
+        <div
+          class="group flex gap-6 p-6 rounded-2xl hover:bg-stone-50 transition-colors border border-transparent hover:border-stone-100">
+          <div
+            class="w-16 h-16 shrink-0 bg-primary-50 text-primary-600 rounded-xl flex items-center justify-center group-hover:bg-primary-600 group-hover:text-white transition-all shadow-sm">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
+            </svg>
+          </div>
+          <div>
+            <h4 class="text-2xl font-serif font-bold text-stone-900 mb-2">Nutrition & Color Therapy</h4>
+            <p class="text-stone-500 font-light leading-relaxed">Personalized nutritional plans combined
+              with color
+              therapy to deeply complement your body’s natural physiological healing processes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specializations Strip -->
+  <section class="py-16 bg-primary-900 text-white relative overflow-hidden">
+    <!-- Abstract shape -->
+    <div
+      class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-primary-800 rounded-full mix-blend-multiply filter blur-3xl opacity-50">
+    </div>
+    <div
+      class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-primary-950 rounded-full mix-blend-multiply filter blur-3xl opacity-50">
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <h3 class="text-3xl font-serif font-bold text-center mb-12">Our Specializations</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 text-center">
+        <div class="bg-primary-800/50 backdrop-blur-sm p-6 rounded-2xl border border-primary-700/50">
+          <h5 class="font-bold text-lg mb-2 text-primary-200">Varicose Vein</h5>
+          <p class="text-sm text-primary-100/70 font-light">Relief from painful, swollen veins</p>
+        </div>
+        <div class="bg-primary-800/50 backdrop-blur-sm p-6 rounded-2xl border border-primary-700/50">
+          <h5 class="font-bold text-lg mb-2 text-primary-200">Diabetic Neuropathy</h5>
+          <p class="text-sm text-primary-100/70 font-light">Manage pain & improve sensation</p>
+        </div>
+        <div class="bg-primary-800/50 backdrop-blur-sm p-6 rounded-2xl border border-primary-700/50">
+          <h5 class="font-bold text-lg mb-2 text-primary-200">Bone Issues</h5>
+          <p class="text-sm text-primary-100/70 font-light">Care for arthritis & fractures</p>
+        </div>
+        <div class="bg-primary-800/50 backdrop-blur-sm p-6 rounded-2xl border border-primary-700/50">
+          <h5 class="font-bold text-lg mb-2 text-primary-200">Developmental</h5>
+          <p class="text-sm text-primary-100/70 font-light">ADHD, Autism & Learning support</p>
+        </div>
+        <div
+          class="bg-primary-800/50 backdrop-blur-sm p-6 rounded-2xl border border-primary-700/50 lg:col-span-1 md:col-span-2">
+          <h5 class="font-bold text-lg mb-2 text-primary-200">Trigeminal Neuralgia</h5>
+          <p class="text-sm text-primary-100/70 font-light">Treatment for facial nerve pain</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="py-24 bg-stone-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-primary-600 font-medium tracking-wide text-sm uppercase mb-3">Testimonials</h2>
+        <h3 class="text-4xl font-serif font-bold text-stone-900 mb-4">Happy Customers</h3>
+        <p class="text-stone-500 text-lg font-light">Discover how our specialized care has transformed lives.
+          From
+          precise treatments to personalized attention.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Testimonial 1 -->
+        <div class="bg-white p-8 rounded-2xl shadow-soft border border-stone-100 relative">
+          <svg class="absolute top-6 right-6 w-10 h-10 text-primary-100" fill="currentColor" viewBox="0 0 32 32">
+            <path
+              d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+          </svg>
+          <p class="text-stone-600 font-light mb-8 italic relative z-10">"Your health can be entrusted in this
+            place.
+            Treating for the disease by solving the real cause that too without any medicines . Hence, no
+            need to bear
+            any side effects."</p>
+          <div class="flex items-center gap-4">
+            <div
+              class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center text-primary-700 font-bold text-lg">
+              FM</div>
+            <div>
+              <h5 class="font-bold text-stone-900">Fathima Mackar</h5>
+              <p class="text-sm text-stone-400">Patient</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="bg-white p-8 rounded-2xl shadow-soft border border-stone-100 relative">
+          <svg class="absolute top-6 right-6 w-10 h-10 text-primary-100" fill="currentColor" viewBox="0 0 32 32">
+            <path
+              d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+          </svg>
+          <p class="text-stone-600 font-light mb-8 italic relative z-10">"I have personally seen the efforts
+            Master
+            Shajahan takes to 'Soukhya' your health, and I 100% recommend this institution. Not only is he
+            willing to
+            clear all your doubts, he encourages it."</p>
+          <div class="flex items-center gap-4">
+            <div
+              class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center text-primary-700 font-bold text-lg">
+              AP</div>
+            <div>
+              <h5 class="font-bold text-stone-900">Abutahir Puthedath</h5>
+              <p class="text-sm text-stone-400">Patient</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="bg-white p-8 rounded-2xl shadow-soft border border-stone-100 relative">
+          <svg class="absolute top-6 right-6 w-10 h-10 text-primary-100" fill="currentColor" viewBox="0 0 32 32">
+            <path
+              d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+          </svg>
+          <p class="text-stone-600 font-light mb-8 italic relative z-10">"He is simple and gentle at heart.
+            The
+            remarkable thing is giving sufficient time to each patient. His clinical diagnosis is very
+            sharp. One of the
+            best doctors I have ever visited."</p>
+          <div class="flex items-center gap-4">
+            <div
+              class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center text-primary-700 font-bold text-lg">
+              FZ</div>
+            <div>
+              <h5 class="font-bold text-stone-900">Fathima Zaima</h5>
+              <p class="text-sm text-stone-400">Patient</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Journey Section -->
+  <section class="py-24 bg-white border-t border-stone-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-primary-600 font-medium tracking-wide text-sm mb-3">Our Journey</h2>
+        <h3 class="text-4xl font-serif font-bold text-stone-700 mb-4">Insights, Events &amp; Collaborations</h3>
+        <p class="text-stone-500 text-lg font-light leading-relaxed">
+          From international training to holistic breakthroughs, explore the highlights of our practice<br
+            class="hidden md:block">
+          and continued learning in the world of acupuncture and integrative therapies.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <!-- Blog 1 -->
+        <div class="group">
+          <div class="mb-6 overflow-hidden flex items-start justify-center bg-stone-100 aspect-[4/3] rounded-xl relative">
+            <div class="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors duration-500 z-10 w-full h-full"></div>
+            <img src="images/tutor1.jpeg" alt="Collaborating with Korean Experts"
+              class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="text-sm text-stone-400 mb-3 flex items-center gap-2">
+            <span>July 10, 2020</span>
+            <span>by</span>
+            <span class="font-medium text-stone-900">Soukhya Clinic</span>
+          </div>
+          <h4
+            class="text-2xl font-serif font-bold text-stone-900 mb-3 leading-snug group-hover:text-primary-600 transition-colors">
+            Collaborating with Korean<br>Acupuncture Experts
+          </h4>
+          <p class="text-stone-500 font-light leading-relaxed">
+            Our practitioner had the honor of meeting Korean acupuncture scholars and discussing integrative
+            approaches
+            in modern practice.
+          </p>
+        </div>
+
+        <!-- Blog 2 -->
+        <div class="group">
+          <div class="mb-6 overflow-hidden flex items-start justify-center bg-stone-100 aspect-[4/3] rounded-xl relative">
+            <div class="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors duration-500 z-10 w-full h-full"></div>
+            <img src="images/tutor2.jpeg" alt="With Senior Lecturers from China"
+              class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="text-sm text-stone-400 mb-3 flex items-center gap-2">
+            <span>June 22, 2019</span>
+            <span>by</span>
+            <span class="font-medium text-stone-900">Soukhya Clinic</span>
+          </div>
+          <h4
+            class="text-2xl font-serif font-bold text-stone-900 mb-3 leading-snug group-hover:text-primary-600 transition-colors">
+            With Senior Lecturers from China
+          </h4>
+          <p class="text-stone-500 font-light leading-relaxed">
+            A valuable learning exchange with esteemed Chinese lecturers on classical acupuncture and
+            advanced
+            pain-relief techniques.
+          </p>
+        </div>
+
+        <!-- Blog 3 -->
+        <div class="group">
+          <div class="mb-6 overflow-hidden flex items-start justify-center bg-stone-100 aspect-[4/3] rounded-xl relative">
+            <div class="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors duration-500 z-10 w-full h-full"></div>
+            <img src="images/tutor3.jpeg" alt="Global Insights for Local Healing"
+              class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="text-sm text-stone-400 mb-3 flex items-center gap-2">
+            <span>May 30, 2021</span>
+            <span>by</span>
+            <span class="font-medium text-stone-900">Soukhya Clinic</span>
+          </div>
+          <h4
+            class="text-2xl font-serif font-bold text-stone-900 mb-3 leading-snug group-hover:text-primary-600 transition-colors">
+            Global Insights for Local Healing
+          </h4>
+          <p class="text-stone-500 font-light leading-relaxed">
+            Combining global exposure with local practice, we continue to enhance our treatments with the
+            latest global
+            acupuncture techniques.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Videos Section -->
+  <section class="py-24 bg-stone-50 border-t border-stone-100 text-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-primary-600 font-medium tracking-wide text-sm uppercase mb-3">Videos</h2>
+      <h3 class="text-4xl font-serif font-bold text-stone-900 mb-12">Watch & Learn</h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Video 1 -->
+        <a href="https://www.youtube.com/watch?v=th8DOlF-sC0" target="_blank"
+          class="group block relative rounded-2xl overflow-hidden shadow-soft aspect-video bg-stone-900">
+          <img src="https://img.youtube.com/vi/th8DOlF-sC0/hqdefault.jpg" alt="Video 1"
+            class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div
+              class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/50 group-hover:bg-primary-600 group-hover:border-primary-600 transition-colors">
+              <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z">
+                </path>
+              </svg>
+            </div>
+          </div>
+        </a>
+        <!-- Video 2 -->
+        <a href="https://www.youtube.com/watch?v=e8zfmbhTDyM" target="_blank"
+          class="group block relative rounded-2xl overflow-hidden shadow-soft aspect-video bg-stone-900">
+          <img src="https://img.youtube.com/vi/e8zfmbhTDyM/hqdefault.jpg" alt="Video 2"
+            class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div
+              class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/50 group-hover:bg-primary-600 group-hover:border-primary-600 transition-colors">
+              <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z">
+                </path>
+              </svg>
+            </div>
+          </div>
+        </a>
+        <!-- Video 3 -->
+        <a href="https://www.youtube.com/watch?v=dSrES9iuWQI" target="_blank"
+          class="group block relative rounded-2xl overflow-hidden shadow-soft aspect-video bg-stone-900">
+          <img src="https://img.youtube.com/vi/dSrES9iuWQI/hqdefault.jpg" alt="Video 3"
+            class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div
+              class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/50 group-hover:bg-primary-600 group-hover:border-primary-600 transition-colors">
+              <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z">
+                </path>
+              </svg>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section id="contact" class="bg-primary-600 py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-5xl font-serif text-white font-bold mb-6">What are you waiting for?</h2>
+      <p class="text-primary-100 text-lg md:text-xl font-light max-w-2xl mx-auto mb-10">
+        Rediscover a life free from pain and stress with our expert acupuncture treatments. Your journey to
+        wellness
+        starts here.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-primary-950 text-white pt-16 pb-8 border-t border-primary-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 text-center md:text-left">
+        <!-- Branding -->
+        <div class="flex flex-col items-center md:items-start text-center md:text-left">
+          <a href="index.html" class="font-serif text-3xl font-bold tracking-tight mb-4">
+            Soukhya<span class="text-primary-400">.</span>
+          </a>
+          <p class="text-primary-200/60 font-light text-sm max-w-xs">
+            Leading acupuncture and holistic health clinic dedicated to restoring your balance and vitality
+            through
+            nature's healing.
+          </p>
+        </div>
+
+        <!-- Quick links -->
+        <div class="flex flex-col items-center md:items-start text-center md:text-left">
+          <h4 class="font-bold text-lg mb-4 text-white">Quick Links</h4>
+          <ul class="space-y-2 text-primary-200/80 font-light">
+            <li><a href="#" class="hover:text-primary-400 transition-colors">Home</a></li>
+            <li><a href="#about" class="hover:text-primary-400 transition-colors">About</a></li>
+            <li><a href="#services" class="hover:text-primary-400 transition-colors">Treatments</a></li>
+            <li><a href="#testimonials" class="hover:text-primary-400 transition-colors">Testimonials</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="flex flex-col items-center md:items-start text-center md:text-left">
+          <h4 class="font-bold text-lg mb-4 text-white">Contact Us</h4>
+          <ul class="space-y-4 text-primary-200/80 font-light">
+            <li class="flex items-start justify-center md:justify-start">
+              <svg class="w-5 h-5 text-primary-400 mr-3 mt-0.5 shrink-0" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              <span>+91 7558835049</span>
+            </li>
+            <li class="flex items-start justify-center md:justify-start">
+              <svg class="w-5 h-5 text-primary-400 mr-3 mt-0.5 shrink-0" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span>Near Eramam Balavadi,<br>Muppathadam Rd, Eramam,<br>Aluva, Kerala 683110</span>
+            </li>
+            <li class="flex items-start justify-center md:justify-start">
+              <svg class="w-5 h-5 text-primary-400 mr-3 mt-0.5 shrink-0" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <a href="mailto:soukhyaclinic@gmail.com"
+                class="hover:text-primary-400 transition-colors">soukhyaclinic@gmail.com</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="border-t border-primary-900/50 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-primary-200/50">
+        <p>&copy;
+          <script>document.write(new Date().getFullYear());</script> Soukhya Health Care. All rights reserved.
+        </p>
+        <div class="mt-4 md:mt-0 flex space-x-4">
+          <a href="#" class="hover:text-primary-400 transition-colors">Terms</a>
+          <a href="#" class="hover:text-primary-400 transition-colors">Privacy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
 
 </html>
-
